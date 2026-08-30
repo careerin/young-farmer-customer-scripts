@@ -1,60 +1,773 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>청년 농업인 클레임 고객응대 스크립트</title>
-<style>
-:root{--navy:#153258;--navy2:#274f7e;--ink:#1e2938;--muted:#64748b;--line:#d9e1ea;--bg:#f3f7fb;--paper:#fff;--yellow:#fee500;--yellowSoft:#fff8cc;--green:#11663d;--greenSoft:#e8f6ed;--warn:#8b4b00;--warnSoft:#fff4df;--danger:#9c2f26;--dangerSoft:#fff0ee;--shadow:0 8px 22px rgba(24,47,76,.10)}
-*{box-sizing:border-box}html{background:#e6ebf1}body{margin:0;background:#e6ebf1;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.58;overflow-x:hidden}.app{width:min(100%,920px);min-height:100vh;margin:auto;background:var(--paper)}.welcome{min-height:100vh;max-width:600px;margin:auto;padding:48px 20px 36px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#f7fbff 0%,#fff 72%)}.creator{text-align:center;font-size:12px;color:#6b7280;margin-bottom:22px}.welcome h1{font-size:29px;line-height:1.28;color:var(--navy);margin:8px 0}.welcome p{font-size:17px;color:#4d5d72;margin:0 0 25px}.field{margin:16px 0}.field label{font-size:16px;font-weight:850;display:block;margin-bottom:7px}.field input{width:100%;height:54px;border:1px solid #cbd5e1;border-radius:12px;padding:0 14px;color:var(--ink);font-size:17px}.field input:focus{outline:3px solid rgba(254,229,0,.52);border-color:#b79e00}.primary{width:100%;min-height:54px;border:0;border-radius:12px;background:var(--yellow);color:#1f1f1f;font-weight:850;font-size:17px;cursor:pointer}.topbar{position:sticky;top:0;z-index:30;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:16px 18px 14px;box-shadow:0 2px 10px rgba(15,35,60,.18)}.brand-row{display:flex;justify-content:space-between;gap:12px;align-items:center}.brand-row small{display:block;font-size:12px;opacity:.78}.brand-row h1{font-size:22px;line-height:1.25;margin:3px 0}.brand-row p{font-size:14px;margin:3px 0 0;opacity:.9}.edit-btn{border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.08);color:#fff;border-radius:9px;min-height:38px;padding:7px 10px;white-space:nowrap;font-size:13px;font-weight:800;cursor:pointer}.guide{background:var(--yellowSoft);border-bottom:1px solid #eadf8d;color:#5b5000;padding:10px 18px;font-size:14px;font-weight:750}.main{padding:23px 18px 40px;background:var(--bg)}.progress{display:flex;align-items:center;gap:7px;margin-bottom:18px;color:#4b5e75;font-size:13px;font-weight:800}.progress span{display:inline-flex;width:25px;height:25px;border-radius:50%;align-items:center;justify-content:center;background:#d9e4ef;color:#4b5e75}.progress span.on{background:var(--green);color:#fff}.progress i{width:20px;height:2px;background:#cbd5e1}.panel{background:#fff;border:1px solid #dce5ee;border-radius:16px;padding:16px;margin-bottom:18px;box-shadow:0 2px 8px rgba(24,47,76,.03)}.panel h2{font-size:20px;line-height:1.35;color:var(--navy);margin:0 0 5px}.panel .desc{font-size:14px;color:var(--muted);margin:0 0 13px}.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.category-btn{min-height:72px;border:1px solid #cdd8e5;background:#fff;border-radius:13px;padding:11px;text-align:left;cursor:pointer;font-size:15px;font-weight:850;line-height:1.32;color:var(--ink)}.category-btn.active{background:var(--greenSoft);border-color:#68aa80;color:#0f5d35}.category-btn.safety{border-color:#e7b3a9;background:#fff9f8}.category-btn.safety.active{background:#fff0ee;border-color:#d98578;color:var(--danger)}.selected-mark{display:block;font-size:11px;color:var(--green);margin-top:3px}.category-btn.safety.active .selected-mark{color:var(--danger)}.topic-area{margin-top:14px;padding-top:14px;border-top:1px solid #e4eaf1}.topic-title{font-size:15px;font-weight:850;color:#44546a;margin:0 0 9px}.topic-list{display:grid;gap:8px}.topic-btn{width:100%;min-height:53px;border:1px solid #d5dee8;background:#f8fafc;border-radius:11px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;text-align:left;cursor:pointer;font-size:15px;font-weight:800;line-height:1.35}.topic-btn:hover{background:#f2f7fc}.topic-btn .arrow{color:#55708d;font-size:20px;line-height:1}.trust{background:#fff;border:1px solid #dce5ee;border-radius:16px;padding:16px;margin-top:22px}.trust h2{font-size:19px;color:var(--navy);margin:0 0 10px}.trust-list{display:grid;gap:9px}.trust-item{background:#f8fafc;border:1px solid #e3e9f0;border-radius:10px;padding:10px 11px;font-size:14px}.trust-item b{display:block;color:var(--navy);font-size:15px;margin-bottom:2px}.footer{padding:18px 20px calc(28px + env(safe-area-inset-bottom));text-align:center;color:#526174;background:#fff;font-size:14px}.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(12,27,46,.58);display:flex;align-items:flex-end;justify-content:center;padding:10px}.modal{width:min(100%,660px);max-height:92vh;overflow:auto;background:#fff;border-radius:20px 20px 13px 13px;box-shadow:0 -10px 30px rgba(0,0,0,.22);padding:18px}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}.modal-head h2{font-size:21px;color:var(--navy);line-height:1.32;margin:0}.modal-head p{font-size:13px;color:var(--muted);margin:3px 0 0}.close-btn{width:40px;height:40px;border:0;background:#eef2f6;border-radius:50%;font-size:25px;cursor:pointer}.step-box{border-radius:13px;padding:13px;margin:11px 0}.customer-box{background:#f8fafc;border:1px solid #e0e7ef}.script-box{background:#fff7c8;border:1px solid #ebd979}.ask-box{background:#f8fafc;border:1px solid #e0e7ef}.guide-box{background:var(--greenSoft);border:1px solid #b7ddc4}.warn-box{background:var(--warnSoft);border:1px solid #f0d3a0;color:var(--warn)}.safety-box{background:var(--dangerSoft);border:1px solid #efbeb8;color:var(--danger)}.step-num{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:850;margin-right:6px}.safety-box .step-num{background:var(--danger)}.step-title{font-size:15px;font-weight:850;color:#526174;vertical-align:middle}.safety-box .step-title{color:var(--danger)}.step-box p{font-size:17px;line-height:1.58;white-space:pre-wrap;margin:8px 0 0}.ask-box ol{margin:8px 0 0;padding-left:22px}.ask-box li{margin:5px 0;font-size:16px;line-height:1.45}.warn-box p,.safety-box p{font-size:15px;line-height:1.52;white-space:pre-wrap;margin:7px 0 0}.modal-actions{margin-top:15px}.dismiss-btn{width:100%;border:1px solid #cbd5e1;background:#fff;border-radius:11px;min-height:53px;font-size:16px;font-weight:800;cursor:pointer}.font-large .panel h2{font-size:24px}.font-large .category-btn,.font-large .topic-btn,.font-large .step-box p,.font-large .ask-box li{font-size:19px}.font-large .trust-item{font-size:17px}@media(max-width:390px){.category-grid{grid-template-columns:1fr}.brand-row h1{font-size:20px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>청년농업인 클레임 안심 고객응대 대시보드</title>
+    <!-- 구글 폰트 Pretendard 로드 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            /* 딥 오렌지 메인 테마 */
+            --deep-orange: #E65100;
+            --deep-orange-dark: #BF360C;
+            --orange-gradient: linear-gradient(135deg, #E65100 0%, #F57C00 50%, #FF9800 100%);
+            --orange-soft: #FFF3E0;
+            --orange-text: #C43E00;
+            
+            /* 역할별 시각 구분 컬러 */
+            --customer-bg: #F1F3F5;
+            --customer-border: #DDE1E6;
+            --script-bg: #FFF8F0;
+            --script-border: #FF9800;
+            --guide-bg: #EAF7EE;
+            --guide-border: #0F9D58;
+            --guide-text: #0B6B38;
+            --danger-red: #D93025;
+            --danger-soft: #FCE8E6;
+            --warn-amber: #E65100;
+            --warn-soft: #FEF7E0;
+            
+            /* 기본 레이아웃 컬러 */
+            --bg-canvas: #F4F6F8;
+            --card-bg: #FFFFFF;
+            --text-main: #1A1C1E;
+            --text-sub: #495057;
+            --text-muted: #747775;
+            --border-light: #E2E4E8;
+            
+            /* 그림자 및 곡률 */
+            --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 16px 36px rgba(230, 81, 0, 0.08);
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            word-break: keep-all;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 12px 10px calc(12px + env(safe-area-inset-bottom));
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 460px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-float);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 94vh;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        /* 딥 오렌지 헤더 */
+        header {
+            background: var(--orange-gradient);
+            color: white;
+            padding: 20px 20px 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .creator-tag {
+            font-size: 0.75rem;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.35;
+        }
+
+        header p {
+            font-size: 0.8rem;
+            margin-top: 3px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        /* 온보딩 인풋 바 */
+        .profile-bar {
+            background: #FAFAFC;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-light);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            width: 100%;
+        }
+
+        .input-group label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border-light);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: #FFFFFF;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--deep-orange);
+            box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.15);
+        }
+
+        /* 카테고리 2행 그리드 (3 + 2 배치) */
+        .category-grid-area {
+            background: #EEF1F4;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cat-row {
+            display: flex;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .cat-btn {
+            flex: 1;
+            padding: 9px 4px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border-light);
+            background: #FFFFFF;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-align: center;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cat-btn.active {
+            background: var(--deep-orange);
+            color: white;
+            border-color: var(--deep-orange);
+            box-shadow: 0 2px 6px rgba(230, 81, 0, 0.25);
+        }
+
+        .cat-btn.safety {
+            border-color: #F8B4B4;
+            color: var(--danger-red);
+        }
+
+        .cat-btn.safety.active {
+            background: var(--danger-red);
+            color: white;
+            border-color: var(--danger-red);
+            box-shadow: 0 2px 6px rgba(217, 48, 37, 0.25);
+        }
+
+        /* 본문 영역 */
+        .content {
+            padding: 16px 14px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .section-desc {
+            font-size: 0.83rem;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        /* 아코디언 카드 리스트 */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-card {
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-light);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .action-card.open {
+            border-color: var(--deep-orange);
+        }
+
+        .action-card.safety-card.open {
+            border-color: var(--danger-red);
+        }
+
+        .card-header {
+            padding: 13px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: #FFFFFF;
+            user-select: none;
+        }
+
+        .card-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            background: var(--orange-soft);
+            color: var(--orange-text);
+            white-space: nowrap;
+        }
+
+        .action-card.safety-card .card-tag {
+            background: var(--danger-soft);
+            color: var(--danger-red);
+        }
+
+        .card-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.35;
+        }
+
+        .arrow-icon {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            transition: transform 0.25s ease;
+            margin-left: 6px;
+        }
+
+        .action-card.open .arrow-icon {
+            transform: rotate(180deg);
+            color: var(--deep-orange);
+        }
+
+        .card-body {
+            display: none;
+            padding: 14px 14px 16px;
+            background: #FAFAFC;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .action-card.open .card-body {
+            display: block;
+        }
+
+        /* ----------------------------------------------------
+           역할별 명확한 시각 구분 (고객 / 사장님 / 가이드 / 주의)
+        ---------------------------------------------------- */
+        
+        /* 1. 고객의 말씀 (그레이 말풍선) */
+        .role-customer-wrap {
+            margin-bottom: 12px;
+        }
+        .role-header {
+            font-size: 0.75rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .role-header.customer-label { color: #5F6368; }
+        .role-header.owner-label { color: var(--deep-orange); }
+        .role-header.guide-label { color: var(--guide-text); }
+        .role-header.warn-label { color: #8C4400; }
+
+        .bubble-customer {
+            background: var(--customer-bg);
+            border: 1px solid var(--customer-border);
+            padding: 10px 12px;
+            border-radius: 4px 12px 12px 12px;
+            font-size: 0.88rem;
+            color: #202124;
+            font-weight: 600;
+            line-height: 1.45;
+        }
+
+        /* 2. 사장님 실전 응대 화법 (오렌지 강조 박스) */
+        .role-owner-wrap {
+            background: var(--script-bg);
+            border: 1.5px solid var(--script-border);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(230, 81, 0, 0.05);
+        }
+        .owner-script-text {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            font-weight: 600;
+            color: #212529;
+            white-space: pre-line;
+        }
+        .owner-script-text strong {
+            color: #BF360C;
+            font-weight: 700;
+        }
+
+        /* 3. 처리 가이드 (그린 박스) */
+        .role-guide-wrap {
+            background: var(--guide-bg);
+            border-left: 4px solid var(--guide-border);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+        }
+        .guide-text {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--guide-text);
+            font-weight: 600;
+        }
+        .guide-sub {
+            font-size: 0.78rem;
+            color: #2E7D32;
+            margin-top: 4px;
+            display: block;
+            opacity: 0.9;
+        }
+
+        /* 4. 긴급 안전 및 주의사항 (경고 배너) */
+        .role-safety-wrap {
+            background: var(--danger-soft);
+            border-left: 4px solid var(--danger-red);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 9px 12px;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: var(--danger-red);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .role-warn-wrap {
+            background: var(--warn-soft);
+            border-left: 4px solid #FFA000;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 9px 12px;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: #7A3E00;
+            font-weight: 600;
+        }
+
+        /* 하단 4대 신뢰 원칙 카드 */
+        .trust-panel {
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-top: 16px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .trust-panel h3 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .trust-item {
+            background: #F8F9FA;
+            padding: 9px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .trust-item strong {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--deep-orange);
+            margin-bottom: 2px;
+        }
+
+        .trust-item p {
+            font-size: 0.73rem;
+            color: var(--text-sub);
+            line-height: 1.35;
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background: #FFFFFF;
+            border-top: 1px solid var(--border-light);
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
-<div id="app" class="app"></div>
-<div id="modalRoot"></div>
+
+<div class="app-container">
+    <!-- 헤더 (딥 오렌지 테마) -->
+    <header>
+        <div class="creator-tag">Created by 커리어인 박은미 대표</div>
+        <h1>청년농업인 클레임 안심 응대</h1>
+        <p>감정 소모 없이 신뢰를 회복하는 4단계 대화 가이드</p>
+    </header>
+
+    <!-- 상단 농장 정보 프로필 입력 (5:5 그리드) -->
+    <div class="profile-bar">
+        <div class="input-group">
+            <label>농장 이름</label>
+            <input type="text" id="farmName" value="햇살농장" placeholder="예: 햇살농장" oninput="renderApp()">
+        </div>
+        <div class="input-group">
+            <label>대표 판매 품목</label>
+            <input type="text" id="farmProduct" value="설향 딸기" placeholder="예: 설향 딸기" oninput="renderApp()">
+        </div>
+    </div>
+
+    <!-- 클레임 5대 카테고리 2행 그리드 (3 + 2 배치) -->
+    <div class="category-grid-area">
+        <div class="cat-row">
+            <button class="cat-btn active" id="btn_delivery" onclick="selectCategory('delivery')">① 배송·수령</button>
+            <button class="cat-btn" id="btn_condition" onclick="selectCategory('condition')">② 상품 상태</button>
+            <button class="cat-btn" id="btn_order" onclick="selectCategory('order')">③ 주문 불일치</button>
+        </div>
+        <div class="cat-row">
+            <button class="cat-btn" id="btn_expectation" onclick="selectCategory('expectation')">④ 기대치 차이</button>
+            <button class="cat-btn safety" id="btn_safety" onclick="selectCategory('safety')">⑤ 긴급 안전 확인</button>
+        </div>
+    </div>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <div class="content">
+        <p class="section-desc" id="categoryDescription">상황별 질문을 터치하면 실제 상황에 맞는 응대 대화문이 펼쳐집니다.</p>
+
+        <!-- 세부 상황 아코디언 리스트 -->
+        <div class="card-list" id="topicCardList"></div>
+
+        <!-- 고객 신뢰를 위한 4대 원칙 고정 패널 -->
+        <div class="trust-panel">
+            <h3>🛡️ 고객 신뢰를 지키는 4대 원칙</h3>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <strong>1. 마음 먼저 알아주기</strong>
+                    <p>기다렸거나 속상했을 고객의 마음을 먼저 공감합니다.</p>
+                </div>
+                <div class="trust-item">
+                    <strong>2. 필요한 내용만 확인</strong>
+                    <p>사진, 수령일, 송장 등 객관적 사실만 차분히 묻습니다.</p>
+                </div>
+                <div class="trust-item">
+                    <strong>3. 가능한 처리 방향 제시</strong>
+                    <p>확인 전 무리한 확답 대신 기준에 맞춘 대안을 냅니다.</p>
+                </div>
+                <div class="trust-item">
+                    <strong>4. 다시 연락할 시간 약속</strong>
+                    <p>지킬 수 있는 시간을 명확히 말하고 신속히 처리합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        클레임은 감정 싸움이 아니라, 고객의 불편을 확인하고 신뢰를 회복하는 과정입니다.
+    </footer>
+</div>
+
 <script>
-const STORE={farm:'claimResponseFarmStable',product:'claimResponseProductStable',font:'claimResponseFontStable'};
-const DEFAULT_TEXT='고객 상황을 확인한 뒤, 알맞게 안내드리겠습니다.';
-const groups=[
- {id:'delivery',title:'① 배송·수령에 문제가 있어요',topics:[
-  {id:'delay',label:'배송이 늦어요',customer:'주문한 {판매품목}이 아직 도착하지 않았어요. 언제 받을 수 있나요?',first:'기다리게 해 드려 죄송합니다.\n제가 배송 상황을 바로 확인해 보겠습니다.',asks:['주문하신 분 성함이나 주문번호를 알려주실 수 있을까요?','꼭 받아보셔야 하는 날짜가 있으신가요?','받으시는 지역을 다시 확인해도 될까요?'],guide:'배송 위치와 출고 내용을 확인한 뒤,\n지킬 수 있는 시간으로 가능한 일정과 방법을 다시 안내드리겠습니다.',warn:'배송 상황을 확인하기 전에는\n도착 시간을 확정해서 말하지 마세요.'},
-  {id:'shipping',label:'배송비가 다르거나 추가 비용이 있어요',customer:'배송비가 생각한 것과 다르거나 추가 비용이 있다고 하네요.',first:'배송비 때문에 혼란을 드려 죄송합니다.\n주문 내용과 받으시는 지역을 먼저 확인해 보겠습니다.',asks:['주문하신 구성과 수량을 알려주실 수 있을까요?','받으시는 지역은 어디인가요?','안내받으신 배송비나 추가 비용이 얼마인지 알려주실 수 있을까요?'],guide:'상품 금액, 배송비, 추가 배송비 여부를 확인한 뒤\n정확한 내용을 다시 안내드리겠습니다.',warn:'배송비와 추가 비용은\n지역과 수령 방법을 확인한 뒤 안내하세요.'},
-  {id:'missed',label:'수령 방법이 헷갈려요',customer:'장터에서 받을 수 있는지, 택배로 받아야 하는지 헷갈려요.',first:'수령 방법이 헷갈리실 수 있습니다.\n고객님께 편한 방법을 먼저 확인해 보겠습니다.',asks:['장터에서 직접 받아보시기 편하신가요?','택배로 받으시면 꼭 필요한 날짜가 있으신가요?','받으시는 지역은 어디인가요?'],guide:'장터 수령과 택배 수령 중 가능한 방법을 확인해서\n고객님께 편한 방법으로 안내드리겠습니다.',warn:'장터 참여 여부와 택배 가능일은\n확인하기 전부터 확답하지 마세요.'}
- ]},
- {id:'condition',title:'② 상품 상태가 아쉬워요',topics:[
-  {id:'bruised',label:'무르거나 멍든 상품이 있어요',customer:'받아 본 {판매품목} 중 일부가 무르거나 멍든 것 같아요.',first:'받아보신 {판매품목} 상태가 기대와 달라 많이 속상하셨겠습니다.',asks:['상품을 받으신 날짜를 알려주실 수 있을까요?','상품 전체와 문제가 보이는 부분 사진을 남겨 주실 수 있을까요?','문제가 있는 상품이 어느 정도인지 알려주실 수 있을까요?'],guide:'정확히 확인하고 빠르게 도와드리기 위해\n사진과 주문 내용을 확인한 뒤 처리 방향을 안내드리겠습니다.',warn:'“농산물은 원래 그럴 수 있어요”라고 먼저 말하지 말고\n고객이 받은 상품 상태를 먼저 확인하세요.'},
-  {id:'storage',label:'보관 방법이 궁금해요',customer:'상품을 어떻게 보관해야 하나요? 상태가 달라질까 걱정돼요.',first:'보관 방법이 궁금하셨군요.\n상품 상태에 맞는 방법으로 안내드리겠습니다.',asks:['상품을 받으신 날짜가 언제인가요?','바로 드실 예정인가요, 며칠 보관하실 예정인가요?','현재 보관하고 계신 장소를 알려주실 수 있을까요?'],guide:'{판매품목}의 현재 상태와 드시는 시기를 확인해서\n보관 방법을 알기 쉽게 안내드리겠습니다.',warn:'품목별 보관 방법이 다를 수 있으므로\n확인하지 않은 보관 방법을 단정해서 안내하지 마세요.'},
-  {id:'damage',label:'포장이 찌그러지거나 파손됐어요',customer:'상자가 찌그러졌고 포장도 일부 파손된 것 같아요.',first:'포장 상태 때문에 불편을 드려 죄송합니다.\n받으신 상태를 확인해 보겠습니다.',asks:['박스 전체와 송장이 보이게 사진을 남겨 주실 수 있을까요?','상품 안쪽 상태도 함께 확인해 주실 수 있을까요?','상품을 받으신 날짜를 알려주실 수 있을까요?'],guide:'포장과 상품 상태를 함께 확인한 뒤\n고객님께 불편이 적은 처리 방향을 안내드리겠습니다.',warn:'포장 파손만 보고 상품 상태를 추측하지 말고\n상품 안쪽 상태까지 함께 확인하세요.'}
- ]},
- {id:'order',title:'③ 주문 내용이 달라요',topics:[
-  {id:'wrong',label:'다른 상품이나 구성이 왔어요',customer:'제가 주문한 {판매품목}과 다른 상품이나 구성이 온 것 같아요.',first:'주문하신 내용과 다르게 받아보셨다면 많이 당황하셨겠습니다.\n제가 주문 내용과 출고 내용을 바로 확인해 보겠습니다.',asks:['주문하신 분 성함이나 주문번호를 알려주실 수 있을까요?','받으신 상품과 라벨이 보이게 사진을 남겨 주실 수 있을까요?','주문하신 구성과 다른 부분을 알려주실 수 있을까요?'],guide:'주문 내역과 출고 내용을 확인한 뒤\n차이가 있으면 고객님께 불편이 적은 방법을 안내드리겠습니다.',warn:'누구의 잘못인지 먼저 따지기보다\n주문 내역과 실제 받은 상품을 먼저 확인하세요.'},
-  {id:'quantity',label:'수량이나 중량이 달라요',customer:'주문한 양보다 적게 온 것 같아요.',first:'주문하신 양보다 적게 느껴지셨다면 많이 아쉬우셨겠습니다.\n확인해서 안내드리겠습니다.',asks:['주문하신 구성과 수량을 알려주실 수 있을까요?','박스 전체와 송장, 상품 사진을 남겨 주실 수 있을까요?','가능하시면 실제 중량이나 수량도 알려주실 수 있을까요?'],guide:'주문 내용과 출고 내용을 확인하고,\n차이가 확인되면 처리 방향을 안내드리겠습니다.',warn:'개수는 상품 크기에 따라 달라질 수 있으므로\n중량과 주문 기준을 함께 확인하세요.'},
-  {id:'option',label:'주문 옵션과 달라요',customer:'가정용으로 주문했는데 생각한 옵션과 다른 것 같아요.',first:'주문하신 옵션과 다르게 느껴지셨다면 혼란스러우셨겠습니다.\n주문 내용을 확인해 보겠습니다.',asks:['주문하신 옵션이나 구성을 알려주실 수 있을까요?','받으신 상품 전체와 라벨 사진을 남겨 주실 수 있을까요?','어떤 부분이 다르게 느껴지셨는지 알려주실 수 있을까요?'],guide:'주문하신 옵션, 사전 안내 내용, 출고 내용을 함께 확인한 뒤\n처리 방향을 안내드리겠습니다.',warn:'고객이 주문을 잘못했다고 단정하지 말고\n주문 기록과 출고 기록을 함께 확인하세요.'}
- ]},
- {id:'expectation',title:'④ 기대한 모습과 달라요',topics:[
-  {id:'size',label:'사진보다 작거나 모양이 달라요',customer:'사진보다 작아 보이거나 모양이 다른 것 같아요.',first:'기대하신 모습과 다르게 느껴지셨다면 많이 아쉬우셨겠습니다.\n말씀 주신 내용을 확인해 보겠습니다.',asks:['크기, 색, 모양 중 어떤 부분이 가장 아쉬우셨나요?','받으신 상품 전체와 아쉬운 부분 사진을 남겨 주실 수 있을까요?','주문하신 옵션을 알려주실 수 있을까요?'],guide:'주문하신 옵션과 사전에 안내드린 기준,\n받으신 상품 상태를 함께 확인한 뒤 안내드리겠습니다.',warn:'농산물은 자연물이라 차이가 있을 수 있지만\n고객의 기대와 안내 내용이 달랐는지는 확인해야 합니다.'},
-  {id:'gift',label:'특별한 용도에 맞지 않아요',customer:'특별한 용도로 준비했는데 생각보다 아쉬워요.',first:'특별한 용도로 준비하셨는데 기대와 달라 많이 아쉬우셨겠습니다.',asks:['언제, 어떤 용도로 준비하셨는지 알려주실 수 있을까요?','가장 아쉬운 부분이 무엇인지 알려주실 수 있을까요?','상품 전체와 아쉬운 부분 사진을 남겨 주실 수 있을까요?'],guide:'주문 목적과 선택하신 구성, 상품 상태를 함께 확인해서\n가능한 처리 방향을 안내드리겠습니다.',warn:'특별한 용도라고 해서 확인 전부터\n환불이나 재발송을 바로 약속하지 마세요.'},
-  {id:'description',label:'상세 안내와 다르게 느껴져요',customer:'안내된 내용과 실제 받은 상품이 다른 것 같아요.',first:'안내 내용과 다르게 느껴지셨다면 혼란스러우셨겠습니다.\n주문 내용과 안내 기준을 확인해 보겠습니다.',asks:['어떤 안내 내용과 다르게 느끼셨는지 알려주실 수 있을까요?','주문하신 옵션을 알려주실 수 있을까요?','받으신 상품 사진을 남겨 주실 수 있을까요?'],guide:'주문 옵션과 사전 안내 내용, 실제 상품 상태를 함께 확인한 뒤\n처리 방향을 안내드리겠습니다.',warn:'상세 안내와 실제 상품의 차이는\n사진과 주문 옵션을 함께 확인한 뒤 판단하세요.'}
- ]},
- {id:'safety',title:'⑤ 바로 확인이 필요해요',safety:true,topics:[
-  {id:'foreign',label:'이물질이 나왔어요',customer:'{판매품목}에서 이물질이 나왔어요.',first:'많이 놀라셨겠습니다.\n우선 해당 상품은 드시지 말고 보관해 주세요.',asks:['상품과 포장, 문제 부분이 보이게 사진을 남겨 주실 수 있을까요?','상품을 받으신 날짜를 알려주실 수 있을까요?','남은 상품은 보관하고 계신가요?'],guide:'수령 정보와 상품 상태를 바로 확인한 뒤\n필요한 처리 방향을 안내드리겠습니다.',warn:'이물질 관련 상황은 일반 불만처럼 가볍게 처리하지 말고\n상품과 포장을 보관하도록 먼저 안내하세요.',safety:true},
-  {id:'illness',label:'먹고 몸이 불편해요',customer:'먹고 나서 몸이 불편한 것 같아요.',first:'몸이 불편하시다니 많이 걱정되셨겠습니다.\n우선 남은 상품은 드시지 말고 보관해 주세요.',asks:['어떤 증상이 있으신지 알려주실 수 있을까요?','상품을 받으신 날짜와 드신 시간을 알려주실 수 있을까요?','상품과 포장, 문제 부분 사진을 남겨 주실 수 있을까요?'],guide:'제가 바로 확인하겠습니다.\n몸이 불편하시면 우선 의료기관 진료를 받아 주세요.',warn:'몸 이상은 원인을 추측하거나 가볍게 말하지 말고\n진료 안내와 상품·포장 보관을 우선하세요.',safety:true},
-  {id:'severe',label:'심하게 변질된 것 같아요',customer:'상품이 심하게 변질된 것 같아요.',first:'상품 상태 때문에 많이 놀라셨겠습니다.\n우선 드시지 말고 상품을 보관해 주세요.',asks:['상품 전체와 문제가 보이는 부분 사진을 남겨 주실 수 있을까요?','상품을 받으신 날짜를 알려주실 수 있을까요?','보관하신 장소와 상태를 알려주실 수 있을까요?'],guide:'상품 상태와 수령 정보를 바로 확인한 뒤\n필요한 처리 방향을 안내드리겠습니다.',warn:'심한 변질 의심 상황은 일반 품질 불만처럼 처리하지 말고\n섭취 중단과 상품 보관을 먼저 안내하세요.',safety:true}
- ]}
-];
-let state={farm:safeGet(STORE.farm),product:safeGet(STORE.product),groupId:'delivery',topicId:'delay'};let fontLarge=safeGet(STORE.font)==='large';
-const app=document.getElementById('app'),modalRoot=document.getElementById('modalRoot');
-function safeGet(key){try{return localStorage.getItem(key)||''}catch(e){return ''}}function safeSet(key,value){try{localStorage.setItem(key,value)}catch(e){}}function safeRemove(key){try{localStorage.removeItem(key)}catch(e){}}
-function esc(value){return String(value??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}function fill(value){return String(value??DEFAULT_TEXT).replaceAll('{농장이름}',state.farm||'내 농장').replaceAll('{판매품목}',state.product||'판매 품목')}
-function validGroup(){return groups.find(g=>g.id===state.groupId)||groups[0]}function validTopic(){const g=validGroup();return g.topics.find(t=>t.id===state.topicId)||g.topics[0]}function textOf(value,fallback=DEFAULT_TEXT){const result=fill(value);return result&&result!=='undefined'&&result!=='null'?result:fallback}function applyFont(){app.classList.toggle('font-large',fontLarge)}
-function render(){applyFont();if(!state.farm||!state.product){renderStart();return}const g=validGroup();state.groupId=g.id;const t=validTopic();state.topicId=t.id;renderMain()}
-function renderStart(){modalRoot.innerHTML='';app.innerHTML=`<main class="welcome"><div class="creator">Created by 커리어인 박은미 대표</div><h1>청년 농업인<br>클레임 고객응대 스크립트</h1><p>고객 불만 상황에서 먼저 무엇을 말하고<br>무엇을 확인해야 하는지 연습해 보세요.</p><div class="field"><label for="farm">농장 이름</label><input id="farm" maxlength="20" placeholder="예: 햇살농장" value="${esc(state.farm)}"></div><div class="field"><label for="product">대표 판매 품목</label><input id="product" maxlength="30" placeholder="예: 설향 딸기" value="${esc(state.product)}"></div><button class="primary" type="button" onclick="saveFarm()">클레임 응대 시작하기</button></main>`}
-function saveFarm(){const farm=document.getElementById('farm'),product=document.getElementById('product');const f=farm?farm.value.trim():'';const p=product?product.value.trim():'';if(!f){alert('농장 이름을 적어 주세요.');farm?.focus();return}if(!p){alert('대표 판매 품목을 적어 주세요.');product?.focus();return}state.farm=f;state.product=p;safeSet(STORE.farm,f);safeSet(STORE.product,p);render()}
-function renderMain(){const g=validGroup();app.innerHTML=`<header class="topbar"><div class="brand-row"><div><small>Created by 커리어인 박은미 대표</small><h1>${esc(state.farm)} 맞춤 클레임 응대</h1><p>대표 판매 품목: ${esc(state.product)}</p></div><button class="edit-btn" type="button" onclick="editFarm()">농장 정보 수정</button></div></header><div class="guide">고객의 불편을 먼저 알아주고, 필요한 내용을 확인한 뒤 처리 방향을 안내해 보세요.</div><main class="main"><div class="progress"><span class="on">1</span><i></i><span class="on">2</span><i></i><span>3</span><b>클레임 유형 선택 → 세부 상황 선택 → 스크립트 연습</b></div><section class="panel"><h2>1. 고객이 어떤 불편을 말씀하셨나요?</h2><p class="desc">고객의 말과 가장 가까운 클레임 유형을 먼저 눌러 보세요.</p><div class="category-grid">${groups.map(group=>`<button class="category-btn ${group.safety?'safety':''} ${state.groupId===group.id?'active':''}" type="button" onclick="chooseGroup('${group.id}')">${esc(group.title)}${state.groupId===group.id?'<span class="selected-mark">선택됨</span>':''}</button>`).join('')}</div><div class="topic-area"><p class="topic-title">2. 세부 상황을 하나 골라 보세요.</p><div class="topic-list">${g.topics.map(topic=>`<button class="topic-btn" type="button" onclick="openModal('${topic.id}')"><span>${esc(topic.label)}</span><span class="arrow" aria-hidden="true">›</span></button>`).join('')}</div></div></section><section class="trust"><h2>고객 신뢰를 위한 4가지 응대 원칙</h2><div class="trust-list"><div class="trust-item"><b>1. 먼저 불편을 알아주기</b>고객이 기다렸거나 속상했던 마음을 먼저 받아줍니다.</div><div class="trust-item"><b>2. 필요한 내용 확인하기</b>주문 정보, 사진, 수령일 등 필요한 내용만 확인합니다.</div><div class="trust-item"><b>3. 처리 방향 안내하기</b>확인 전 확정하지 말고, 가능한 방향을 안내합니다.</div><div class="trust-item"><b>4. 다시 연락할 시간 말하기</b>지킬 수 있는 시간으로 다시 안내하겠다고 말합니다.</div></div></section></main><footer class="footer">클레임은 감정 싸움이 아니라, 고객의 불편을 확인하고 신뢰를 회복하는 과정입니다.<br><button class="edit-btn" style="margin-top:12px;background:#fff;color:#153258;border-color:#cbd5e1" type="button" onclick="toggleFont()">글자 ${fontLarge?'기본':'크게'} 보기</button></footer>`}
-function chooseGroup(id){const next=groups.find(g=>g.id===id)||groups[0];state.groupId=next.id;state.topicId=next.topics[0].id;render()}function openModal(id){const g=validGroup();const next=g.topics.find(t=>t.id===id)||g.topics[0];state.topicId=next.id;buildModal()}
-function buildModal(){const g=validGroup(),t=validTopic();const customer=textOf(t.customer,'고객의 불편 내용을 확인해 보세요.');const first=textOf(t.first);const guide=textOf(t.guide);const warn=textOf(t.warn,'확인되지 않은 내용은 바로 확정해서 말하지 마세요.');const asks=Array.isArray(t.asks)&&t.asks.length?t.asks:[DEFAULT_TEXT];const safety=Boolean(g.safety||t.safety);modalRoot.innerHTML=`<div class="modal-backdrop" onclick="backdropClose(event)"><div class="modal" role="dialog" aria-modal="true" aria-label="클레임 고객응대 스크립트" onclick="event.stopPropagation()"><div class="modal-head"><div><h2>${esc(g.title)}</h2><p>${esc(t.label)}</p></div><button class="close-btn" type="button" aria-label="스크립트 팝업 닫기" onclick="closeModal()">×</button></div><div class="step-box customer-box"><span class="step-num">1</span><span class="step-title">고객 상황</span><p>“${esc(customer)}”</p></div><div class="step-box script-box"><span class="step-num">2</span><span class="step-title">마음 먼저 알아주기</span><p>${esc(first)}</p></div><div class="step-box ask-box"><span class="step-num">3</span><span class="step-title">꼭 확인할 것</span><ol>${asks.slice(0,3).map(item=>`<li>${esc(textOf(item))}</li>`).join('')}</ol></div><div class="step-box guide-box"><span class="step-num">4</span><span class="step-title">처리 방향과 다음 안내</span><p>${esc(guide)}\n\n확인한 뒤 지킬 수 있는 시간으로 다시 안내드리겠습니다.</p></div>${safety?`<div class="step-box safety-box"><span class="step-title">🚨 안전 관련 우선 안내</span><p>우선 해당 상품은 드시지 말고 보관해 주세요.\n몸이 불편하시면 우선 의료기관 진료를 받아 주세요.</p></div>`:''}<div class="step-box warn-box"><span class="step-title">⚠️ 핵심 주의사항</span><p>${esc(warn)}</p></div><div class="modal-actions"><button class="dismiss-btn" type="button" onclick="closeModal()">닫기</button></div></div></div>`}
-function closeModal(){modalRoot.innerHTML=''}function backdropClose(event){if(event.target===event.currentTarget)closeModal()}function editFarm(){state.farm='';state.product='';safeRemove(STORE.farm);safeRemove(STORE.product);render()}function toggleFont(){fontLarge=!fontLarge;safeSet(STORE.font,fontLarge?'large':'default');render()}
-render();
+    // 5대 클레임 데이터 (완성형 실전 구어체 화법 적용)
+    const claimData = [
+        {
+            id: 'delivery',
+            title: '① 배송·수령 문제',
+            desc: '배송 지연, 배송비 차이, 수령 방법 혼선 시 당황하지 않고 대처하는 방법입니다.',
+            topics: [
+                {
+                    label: '배송이 늦어요',
+                    customer: '주문한 {품목}이 아직 도착하지 않았어요. 언제 받을 수 있나요?',
+                    scriptTmpl: (farm, prod) => `"기다리게 해 드려 정말 죄송합니다 고객님! 기다리시는 마음 충분히 이해합니다. 제가 지금 바로 택배사 전산으로 배송 상황을 조회해 드리겠습니다.\n\n정확한 조회를 위해 <strong>주문하신 분 성함이나 연락처</strong>를 말씀해 주시겠습니까? 혹시 오늘 중으로 꼭 받아보셔야 하는 특별한 일정이 있으실까요?"`,
+                    guide: '배송 위치와 출고 내역을 확인한 뒤, 임의 추측이 아닌 택배사 기사님 확인을 거쳐 지킬 수 있는 시간으로 재안내합니다.',
+                    warn: '배송 상황을 전산으로 확인하기 전에는 도착 시간을 섣불리 확정해서 약속하지 마세요.'
+                },
+                {
+                    label: '배송비가 다르거나 추가 비용 발생',
+                    customer: '배송비가 생각한 것과 다르거나 추가 비용이 있다고 하네요.',
+                    scriptTmpl: (farm, prod) => `"배송비 안내로 혼란과 불편을 드려 정말 죄송합니다 고객님. 주문 내용과 지역별 배송 기준을 제가 바로 확인해 드리겠습니다.\n\n주문해 주신 <strong>상품 구성과 수량, 그리고 받으시는 지역(도서산간 여부)</strong>을 한 번만 확인해 주실 수 있을까요? 확인 후 차이가 있는 부분은 명확하게 바로잡아 안내드리겠습니다."`,
+                    guide: '기본 배송비와 도서산간 추가 배송비 기준을 명확히 확인한 뒤 차액 발생 사유를 정중히 설명합니다.',
+                    warn: '지역과 수령 방식을 전산으로 확인하기 전에 배송비 금액을 단정해서 논쟁하지 마세요.'
+                },
+                {
+                    label: '수령 방법이 헷갈려요 (직판/택배)',
+                    customer: '장터/직판장에서 받을 수 있는지, 택배로 받아야 하는지 헷갈려요.',
+                    scriptTmpl: (farm, prod) => `"수령 방법 때문에 헷갈리셨군요 고객님! 고객님께서 가장 편하신 방법으로 받아보실 수 있게 제가 체크해 드리겠습니다.\n\n혹시 <strong>직판장이나 장터로 직접 오셔서 수령하시는 게 편하신가요, 아니면 댁에서 택배로 받으시는 게 편하신가요?</strong> 일정과 현장 재고를 확인해서 가장 편한 방법으로 맞춰 안내해 드리겠습니다."`,
+                    guide: '현장 수령 가능 재고와 택배 마감 시간을 확인한 후 고객의 편의에 맞춰 최종 확정합니다.',
+                    warn: '현장 잔여 수량을 확인하기 전에 무조건 현장 수령이 가능하다고 확답하지 마세요.'
+                }
+            ]
+        },
+        {
+            id: 'condition',
+            title: '② 상품 상태 불만',
+            desc: '무름, 멍듦, 파손 등 신선도 이슈 발생 시 감정 소모 없이 해결하는 기준입니다.',
+            topics: [
+                {
+                    label: '무르거나 멍든 상품이 있어요',
+                    customer: '받아 본 {품목} 중 일부가 무르거나 멍든 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"어머나 고객님, 기분 좋게 기다리셨을 텐데 받아보신 ${prod} 상태가 기대에 미치지 못해 얼마나 속상하셨습니까. 진심으로 죄송합니다.\n\n저희가 신속하게 확인하고 바로 책임지고 조치해 드리겠습니다. <strong>번거로우시겠지만 빠르고 정확한 처리를 위해 상품 전체와 문제가 보이는 부분 사진을 딱 1장만 찍어 이 번호로 남겨주시겠습니까?</strong> 확인되는 즉시 기다리시지 않게 새 상품 재발송이나 환불 기준에 맞춰 바로 안내드리겠습니다."`,
+                    guide: '사진 확인 즉시 지체 없이 당일 새 상품 재발송 또는 해당 수량만큼 환불 조치를 안내합니다.',
+                    warn: '“농산물은 생물이라 원래 그럴 수 있다”는 변명은 금물이며, 사진 요청 시에도 고객을 돕기 위한 절차임을 정중히 밝히세요.'
+                },
+                {
+                    label: '보관 방법 문의 및 변질 걱정',
+                    customer: '상품을 어떻게 보관해야 하나요? 상태가 금방 변할까 봐 걱정돼요.',
+                    scriptTmpl: (farm, prod) => `"보관 방법이 궁금하셨군요 고객님! 산지에서 갓 수확한 신선함 그대로 가장 맛있게 드실 수 있는 팁을 안내해 드리겠습니다.\n\n고객님, <strong>상품을 언제 수령하셨는지와 바로 다 드실 예정인지, 며칠 두고 드실 예정인지</strong> 알려주시겠어요? 드시는 시기에 맞춰 실온 후숙이나 밀폐 냉장 보관법을 맞춤으로 딱 알기 쉽게 설명해 드리겠습니다."`,
+                    guide: '품목의 숙기 상태와 섭취 타이밍에 맞춰 최적의 온도와 밀폐 보관법을 안내합니다.',
+                    warn: '품목별 적정 보관 온도가 다르므로 확인되지 않은 일반 상식을 섣불리 안내하지 마세요.'
+                },
+                {
+                    label: '포장 상자가 파손/찌그러짐',
+                    customer: '상자가 심하게 찌그러졌고 안쪽 포장도 일부 파손된 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"포장 상자가 심하게 훼손되어 도착했다니 정말 죄송합니다 고객님. 배송 과정에서 큰 충격이 있었던 것 같습니다.\n\n택배사 파손 접수와 신속한 재발송 처리를 위해, <strong>박스 겉면 운송장 라벨과 파손된 부위 사진을 1장만 남겨주시겠습니까?</strong> 혹시 안쪽 ${prod}도 다친 곳이 있는지 함께 확인해 주시면, 확인 즉시 새 상품으로 다시 준비해 보내드리겠습니다."`,
+                    guide: '외부 송장 사진 및 내부 원물 상태를 확인하여 택배사 파손 보상 접수와 동시 고객 재발송을 진행합니다.',
+                    warn: '포장 파손만 보고 상품 상태를 지레짐작하지 말고 안쪽 실제 상품 손상 여부를 함께 확인하세요.'
+                }
+            ]
+        },
+        {
+            id: 'order',
+            title: '③ 주문 내용 불일치',
+            desc: '오배송, 수량/중량 부족, 옵션 착오 발생 시 차분하게 대조하는 응대입니다.',
+            topics: [
+                {
+                    label: '다른 상품이나 구성이 왔어요',
+                    customer: '제가 주문한 {품목}과 다른 상품이나 구성이 온 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"주문하신 내용과 다른 상품을 받아보셨다니 많이 당황하셨겠습니다 고객님. 진심으로 사과드립니다. 저희 출고 내역을 즉시 대조해 드리겠습니다.\n\n정확한 확인을 위해 <strong>주문하신 분 성함과 받으신 박스의 송장 라벨 사진</strong>을 한 장만 남겨주시겠습니까? 오배송 내역이 확인되는 즉시 가장 빠른 특급 배송으로 원래 주문하신 정품을 다시 출고해 드리겠습니다."`,
+                    guide: '출고 라벨과 주문 전산을 대조한 후 오배송 확인 시 맞교환 또는 즉시 재발송 처리를 진행합니다.',
+                    warn: '고객의 주문 착오인지 농장 실수인지 따지려 하지 말고 주문 내역과 실물 사진을 먼저 차분히 확인하세요.'
+                },
+                {
+                    label: '수량이나 중량이 부족해요',
+                    customer: '주문한 양보다 적게 온 것 같아요. 박스 무게가 안 맞아요.',
+                    scriptTmpl: (farm, prod) => `"주문하신 양보다 부족하게 느껴지셨다면 많이 아쉬우셨겠습니다 고객님. 정확한 중량 기준을 확인해 드리겠습니다.\n\n산지 수확 직후 배송되는 생물 특성상 수분 증발로 1~3% 내외의 자연 감모가 있을 수 있으나, <strong>혹시 실측 중량이 어느 정도 부족하신지와 저울 사진</strong>을 확인해 주실 수 있을까요? 출고 데이터와 비교하여 부족한 부분은 즉시 추가 발송이나 환불로 책임지고 보상해 드리겠습니다."`,
+                    guide: '출고 당시 실측 데이터와 비교하고, 자연 감모 허용치를 초과하는 부족분은 즉시 추가 발송 또는 부분 환불합니다.',
+                    warn: '자연 감모 현상을 부드럽게 설명하되, 고객이 납득할 수 있도록 기준치를 넘는 부족분은 즉시 보상하세요.'
+                },
+                {
+                    label: '주문 옵션(가정용/선물용) 착오',
+                    customer: '선물용(또는 가정용)으로 주문했는데 생각한 옵션과 다른 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"주문하신 옵션과 다르게 느껴지셨다면 혼란스러우셨겠습니다 고객님. 저희 주문 접수 기록과 선별 규격을 꼼꼼히 확인해 보겠습니다.\n\n고객님께서 <strong>주문하셨던 옵션명과 받으신 상품 전체 사진</strong>을 한 장만 남겨주시겠습니까? 사전 안내드렸던 선별 기준과 출고 기록을 대조하여 고객님의 불편을 덜어드릴 수 있는 방향으로 신속히 안내드리겠습니다."`,
+                    guide: '주문 옵션 규격과 실제 상품 사진을 대조한 후 기준 차이 발생 시 대안을 제시합니다.',
+                    warn: '고객이 옵션을 잘못 골랐다고 단정하지 말고 정량 선별 규격표를 기준으로 차분히 설명하세요.'
+                }
+            ]
+        },
+        {
+            id: 'expectation',
+            title: '④ 기대치 차이',
+            desc: '크기, 모양, 특별 용도(선물) 기대와 다를 때 신뢰를 지키는 설명법입니다.',
+            topics: [
+                {
+                    label: '사진보다 작거나 모양이 달라요',
+                    customer: '상세페이지 사진보다 크기가 작아 보이거나 모양이 다른 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"기대하셨던 모습과 차이가 있어 많이 아쉬우셨겠습니다 고객님. 저희가 선별 기준대로 정직하게 출하되었는지 확인해 드리겠습니다.\n\n혹시 <strong>크기나 모양 중 어떤 부분이 가장 아쉬우셨는지와 손이나 동전과 함께 비교된 사진</strong>을 한 장 남겨주시겠습니까? 주문하신 등급 규격 기준과 꼼꼼히 대조하여 명확하게 안내해 드리겠습니다."`,
+                    guide: '선별 기준표의 중량 규격과 실물 사진을 대조하여 객관적 기준을 정중히 설명합니다.',
+                    warn: '농산물은 개체 차이가 있을 수 있음을 설명하되, 사전 안내 규격과 일치했는지는 반드시 확인하세요.'
+                },
+                {
+                    label: '특별한 용도(선물·행사)에 미흡',
+                    customer: '중요한 선물용으로 준비했는데 생각보다 포장이나 외관이 아쉬워요.',
+                    scriptTmpl: (farm, prod) => `"귀한 분께 드릴 소중한 선물로 준비하셨을 텐데 만족을 드리지 못해 마음이 무겁습니다 고객님.\n\n혹시 <strong>선물하셔야 하는 일정(행사일)이 언제이신지와 가장 아쉬운 부분(과실 또는 포장)</strong>을 말씀해 주실 수 있을까요? 일정에 차질이 생기지 않도록 상태를 즉시 확인하고 저희가 도울 수 있는 최선의 대안을 빠르게 찾아드리겠습니다."`,
+                    guide: '선물 전달 일정에 차질이 없도록 상태를 즉시 확인하고 농가에서 지원 가능한 최선의 대안을 마련합니다.',
+                    warn: '일정이 급하다고 해서 확인도 거치지 않고 불가능한 출하 일정을 섣불리 약속하지 마세요.'
+                },
+                {
+                    label: '상세 안내와 다르게 느껴져요',
+                    customer: '안내된 맛이나 특징 설명과 실제 상품이 다른 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"안내 내용과 맛이나 식감이 다르게 느껴지셨다면 혼란스러우셨겠습니다 고객님.\n\n혹시 <strong>어떤 부분(당도, 산미, 아삭함 등)이 다르게 느껴지셨는지와 수령 후 보관 환경</strong>을 말씀해 주실 수 있을까요? 품종 고유의 특성과 적정 숙기 상태를 확인해 드리고, 선별 미흡 부분이 확인되면 끝까지 책임지고 조치해 드리겠습니다."`,
+                    guide: '품종별 특성과 적정 후숙 기간을 설명하고, 선별 기준 미달 여부를 확인하여 정직하게 조치합니다.',
+                    warn: '상세페이지 기준과 실제 수확분의 당도/숙기 데이터를 확인한 뒤 객관적으로 안내하세요.'
+                }
+            ]
+        },
+        {
+            id: 'safety',
+            title: '⑤ 긴급 안전 확인',
+            safety: true,
+            desc: '이물질, 변질, 섭취 후 이상 반응 등 안전 문제는 최우선으로 즉시 대응합니다.',
+            topics: [
+                {
+                    label: '이물질이 나왔어요',
+                    customer: '{품목}에서 이물질이 발견되었어요.',
+                    scriptTmpl: (farm, prod) => `"많이 놀라셨겠습니다 고객님! 진심으로 죄송합니다. <strong>우선 해당 상품은 절대 추가로 드시지 마시고 있는 그대로 보관해 주십시오.</strong>\n\n원인 규명과 재발 방지 조치를 위해 <strong>발견된 이물질과 포장 상태 사진</strong>을 이 번호로 남겨주실 수 있을까요? 선별 라인을 즉시 역추적하고 전액 환불 및 보상 절차를 신속하게 진행해 드리겠습니다."`,
+                    guide: '선별 및 포장 라인을 즉시 점검하고 회수 분석과 100% 환불/보상 절차를 신속히 진행합니다.',
+                    warn: '이물질 클레임은 절대 가볍게 넘기지 말고 섭취 중단 및 원물 보관 안내를 최우선으로 하세요.'
+                },
+                {
+                    label: '섭취 후 몸이 불편해요',
+                    customer: '농산물을 먹고 나서 배가 아프거나 몸이 불편한 것 같아요.',
+                    scriptTmpl: (farm, prod) => `"몸이 불편하시다니 정말 걱정스럽고 죄송합니다 고객님. <strong>우선 추가 섭취를 즉시 중단하시고, 몸 상태가 안 좋으시면 병원 진료를 먼저 받아주십시오.</strong>\n\n고객님의 건강이 최우선입니다. 진료를 받으신 후 <strong>증상과 드신 시간, 남은 상품 상태</strong>를 알려주시면 저희 농장의 생산물 배상책임보험을 통해 신속하고 책임 있게 처리해 드리겠습니다."`,
+                    guide: '고객의 건강을 최우선으로 진료를 먼저 권유하며, 생산물 배상책임보험 접수 절차를 명확히 안내합니다.',
+                    warn: '원인을 임의로 추측하거나 책임을 회피하려 하지 말고 진료 우선 안내와 보험 접수 절차를 따르세요.'
+                },
+                {
+                    label: '심하게 변질된 것 같아요',
+                    customer: '곰팡이가 피었거나 냄새가 나는 등 심하게 변질되었어요.',
+                    scriptTmpl: (farm, prod) => `"상품 상태 때문에 많이 불쾌하고 놀라셨겠습니다 고객님. 진심으로 사과드립니다. <strong>건강을 위해 절대 드시지 마시고 그대로 보관해 주십시오.</strong>\n\n배송 중 고온 노출이나 통풍 문제 여부를 확인하기 위해 <strong>변질된 부위와 박스 전체 사진</strong>을 남겨주실 수 있을까요? 확인되는 즉시 기다리시지 않게 전액 환불이나 신선한 새 상품 특급 재발송으로 바로 조치해 드리겠습니다."`,
+                    guide: '배송 중 환경 문제 여부를 점검하고 지체 없이 전액 환불 또는 새 상품 재발송을 진행합니다.',
+                    warn: '심한 변질은 일반 품질 불만과 다르므로 섭취 중단과 사진 확인을 즉시 안내하세요.'
+                }
+            ]
+        }
+    ];
+
+    let currentCategoryId = 'delivery';
+
+    // 카테고리 선택 버튼 핸들러
+    function selectCategory(catId) {
+        currentCategoryId = catId;
+        
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        const activeBtn = document.getElementById(`btn_${catId}`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        renderTopics();
+    }
+
+    // 아코디언 토글 핸들러
+    function toggleCard(cardElement) {
+        cardElement.classList.toggle('open');
+    }
+
+    // 세부 토픽 리스트 렌더링
+    function renderTopics() {
+        const farm = document.getElementById('farmName').value.trim() || '햇살농장';
+        const prod = document.getElementById('farmProduct').value.trim() || '농산물';
+        const currentCat = claimData.find(c => c.id === currentCategoryId);
+        
+        document.getElementById('categoryDescription').innerText = currentCat.desc;
+        const container = document.getElementById('topicCardList');
+
+        container.innerHTML = currentCat.topics.map((t, idx) => {
+            const customerText = t.customer.replace(/{품목}/g, prod).replace(/{농장}/g, farm);
+            const scriptText = t.scriptTmpl(farm, prod);
+
+            return `
+            <div class="action-card ${t.safety ? 'safety-card' : ''}" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <span class="card-tag">상황 ${idx + 1}</span>
+                        <span class="card-title">${t.label}</span>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </div>
+                <div class="card-body">
+                    
+                    <!-- 1. 고객의 말씀 (그레이 말풍선) -->
+                    <div class="role-customer-wrap">
+                        <div class="role-header customer-label">👤 고객의 말씀</div>
+                        <div class="bubble-customer">"${customerText}"</div>
+                    </div>
+
+                    <!-- 2. 사장님 실전 응대 화법 (오렌지 강조 박스) -->
+                    <div class="role-owner-wrap">
+                        <div class="role-header owner-label">🗣️ 사장님 실전 응대 화법</div>
+                        <div class="owner-script-text">${scriptText}</div>
+                    </div>
+
+                    <!-- 3. 처리 가이드 (그린 박스) -->
+                    <div class="role-guide-wrap">
+                        <div class="role-header guide-label">✅ 처리 기준 및 사후 안내</div>
+                        <div class="guide-text">${t.guide}</div>
+                        <span class="guide-sub">↳ "확인 후 지킬 수 있는 시간으로 다시 안내드리겠습니다."</span>
+                    </div>
+
+                    <!-- 4. 긴급 안전 확인 (해당 시 노출) -->
+                    ${t.safety ? `
+                    <div class="role-safety-wrap">
+                        🚨 <strong>안전 최우선 안내:</strong> 우선 해당 상품은 절대 추가로 드시지 말고 보관해 주세요. 몸이 불편하시면 병원 진료를 먼저 받아주세요.
+                    </div>` : ''}
+
+                    <!-- 5. 주의사항 (옐로우/경고 배너) -->
+                    <div class="role-warn-wrap">
+                        ⚠️ <strong>핵심 주의:</strong> ${t.warn}
+                    </div>
+
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // 전체 렌더링
+    function renderApp() {
+        renderTopics();
+    }
+
+    // 최초 실행
+    renderApp();
 </script>
+
 </body>
 </html>
